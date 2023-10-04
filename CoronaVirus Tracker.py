@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 import plyer
 import pandas as pd
 
-
 def datacollected():
     def notification(title, message):
         plyer.notification.notify(
@@ -34,7 +33,7 @@ def datacollected():
 
     for i in abc:
         id = i.find_all('td')
-        if(id[1].text.strip().lower() == countrynotification):
+        if(id[1].text.strip().lower() == countrynotification.lower()):
             totalcases1 = id[2].text.strip()
             newcases = id[3].text.strip()
             totaldeaths = id[4].text.strip()
@@ -72,10 +71,9 @@ def datacollected():
             path2 = '{}/coronadata.csv'.format(path)
             sorts.to_csv(r'{}'.format(path2))
 
-        if(len(flist) != 0):
-            messagebox.showinfo(
-                "Notification", "Corona Record is saved in {}".format(path2), parent=coro)
-
+    if(len(flist) != 0):
+        messagebox.showinfo(
+            "Notification", "Corona Record is saved in {}".format(path2), parent=coro)
 
 def downloaddata():
     global path
@@ -89,21 +87,17 @@ def downloaddata():
     Injson.configure(state='normal')
     Inexcel.configure(state='normal')
 
-
 def inhtmldownload():
     flist.append('html')
     Inhtml.configure(state='disabled')
-
 
 def injsondownload():
     flist.append('json')
     Injson.configure(state='disabled')
 
-
 def inexceldownload():
     flist.append('csv')
     Inexcel.configure(state='disabled')
-
 
 coro = Tk()
 coro.title("Corona Virus Information")
@@ -112,7 +106,6 @@ coro.configure(bg="#ff3333")
 coro.iconbitmap('corona.ico')
 flist = []
 path = ''
-
 
 mainlabel = Label(coro, text="Corona Virus Live Tracker", font=(
     "new roman", 30, "italic bold"), bg="#e60000", width=33, fg="black", bd=5)
@@ -147,5 +140,5 @@ submit = Button(coro, text="Submit", font=(
     "arial", 20, "italic bold"), bg="#3399ff", foreground="#0000b3", relief=RIDGE, activebackground="#0000b3", activeforeground="#3399ff", bd=5, width=17, command=downloaddata)
 submit.place(x=317, y=300)
 
-
 coro.mainloop()
+
